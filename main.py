@@ -17,13 +17,16 @@ def home():
 @app.route("/api/v1/<station>/<date>")
 def data(station, date):
     try:
+        date_year = date[:4]
+        date_month = date[4:6]
+        date_day = date[6:]
         ## Reading the data
         filename = f"data\\TG_STAID{str(station).zfill(6)}.txt"
         df = pd.read_csv(filename, skiprows=20, parse_dates=["    DATE"])
-        temperature = df.loc[df["    DATE"] == date]["   TG"].squeeze() / 10
+        temperature = df.loc[df["    DATE"] == date, "   TG"].squeeze() / 10
         ## Showing the API
         return {"station": station,
-                "date": date,
+                "date": f"{date_year}/{date_month}/{date_day}",
                 "temperature": temperature}
     except FileNotFoundError:
         return "File Not Found!"
