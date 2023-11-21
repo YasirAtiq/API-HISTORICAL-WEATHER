@@ -6,16 +6,20 @@
 </head>
 <body>
     <h1>Weather Data API</h1>
-    <p>URL format: http://127.0.0.1:5000/api/v1/station number/date</p>
-    <p>URL example: <a href="http://127.0.0.1:5000/api/10/19881025">
-        http://127.0.0.1:5000/api/v1/10/19881025</a>
-        <br>
-        URL format for all data of one station: http://127.0.0.1:5000/api/v1/station number/
-        <br>
-        URL format for annual data of one station is : http://127.0.0.1:5000/api/v1/yearly/(station number)/(year)/
-        <br>
-        Here is a table to help you (the STAID is the station number to add):
-        {{data|safe}}
+    <p>URL for data for a particular station and date format: http://127.0.0.1:5000/api/exact_date/(station_number)/(date)
+    <br>
+    URL example: <a href="http://127.0.0.1:5000/api/exact_date/10/19881025"> http://127.0.0.1:5000/api/exact_date/10/19881025</a>
+    <br>
+    URL format for all data of one station: http://127.0.0.1:5000/api/all_data_for_station/(station_number)
+    <br>
+    URL example: <a href="http://127.0.0.1:5000/api/all_data_for_station/10">http://127.0.0.1:5000/api/all_data_for_station/10 </a>
+    <br>
+    URL format for annual data of one station is : http://127.0.0.1:5000/api/all_data_for_station_annual/(station_number)/(year)
+    <br>
+    URL example: <a href="http://127.0.0.1:5000/api/all_data_for_station_annual/10/1980">http://127.0.0.1:5000/api/all_data_for_station_annual/10/1980</a>
+    <br>
+    Here is a table to help you (the STAID is the station number to add):
+    {{data|safe}}
     </p>
 </body>
 </html>
