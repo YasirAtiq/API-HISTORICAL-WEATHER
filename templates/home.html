@@ -6,17 +6,17 @@
 </head>
 <body>
     <h1>Weather Data API</h1>
-    <p>URL for data for a particular station and date format: http://127.0.0.1:5000/api/exact_date/(station_number)/(date)
+    <p>URL for data for a particular station and date format: http://127.0.0.1:5000/api/exact_date/(station_number)/(date)/api_key=(your_api_key)
     <br>
-    URL example: <a href="http://127.0.0.1:5000/api/exact_date/10/19881025"> http://127.0.0.1:5000/api/exact_date/10/19881025</a>
+    URL example: <a href="http://127.0.0.1:5000/api/exact_date/10/19881025/api_key=demo_key"> http://127.0.0.1:5000/api/exact_date/10/19881025/api_key=(your_api_key)</a>
     <br>
-    URL format for all data of one station: http://127.0.0.1:5000/api/all_data_for_station/(station_number)
+    URL format for all data of one station: http://127.0.0.1:5000/api/all_data_for_station/(station_number)/api_key=(your_api_key)
     <br>
-    URL example: <a href="http://127.0.0.1:5000/api/all_data_for_station/10">http://127.0.0.1:5000/api/all_data_for_station/10 </a>
+    URL example: <a href="http://127.0.0.1:5000/api/all_data_for_station/10/api_key=demo_key">http://127.0.0.1:5000/api/all_data_for_station/10/api_key=(your_api_key) </a>
     <br>
-    URL format for annual data of one station is : http://127.0.0.1:5000/api/all_data_for_station_annual/(station_number)/(year)
+    URL format for annual data of one station is : http://127.0.0.1:5000/api/all_data_for_station_annual/(station_number)/(year)/api_key=(your_api_key)
     <br>
-    URL example: <a href="http://127.0.0.1:5000/api/all_data_for_station_annual/10/1980">http://127.0.0.1:5000/api/all_data_for_station_annual/10/1980</a>
+    URL example: <a href="http://127.0.0.1:5000/api/all_data_for_station_annual/10/1980/api_key=demo_key">http://127.0.0.1:5000/api/all_data_for_station_annual/10/1980/api_key=(your_api_key)</a>
     <br>
     Here is a table to help you (the STAID is the station number to add):
     {{data|safe}}
