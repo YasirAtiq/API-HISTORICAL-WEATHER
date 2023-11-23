@@ -95,4 +95,4 @@ def all_station_data_annual(station, year, api_key):
         return "INCORRECT API KEY!"
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
