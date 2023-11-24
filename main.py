@@ -8,9 +8,7 @@ import sqlite3
 def get_api_keys():
     connection = PooledDB(sqlite3, maxconnections=10, database="api_keys.sql").connection()
     cursor = connection.cursor()
-    api_keys = []
-    for row in cursor.execute("SELECT * FROM API_KEYS"):
-        api_keys.append(row[1])
+    api_keys = [row[1] for row in cursor.execute("SELECT * FROM API_KEYS")]
     cursor.close()
     connection.close()
     return api_keys
@@ -26,11 +24,12 @@ stations = stations[["Station ID", "Station"]]
 
 @app.route("/")
 def home():
-    return render_template('home.html', data=stations.to_html(index=False, justify="center"))
+    return render_template('home.html', data=stations.to_html(
+        index=False, justify="center"))
 
 
 @app.route("/api/exact_date/<station>/<date>/api_key=<api_key>")
-def data(station, date, api_key):
+def exact_date(station, date, api_key):
     api_keys = get_api_keys()
     if api_key in api_keys:
         try:
@@ -60,7 +59,7 @@ def data(station, date, api_key):
         return "API KEY INCORRECT!"
 
 @app.route("/api/all_data_for_station/<station>/api_key=<api_key>")
-def all_station_data(station, api_key):
+def all_data_for_station(station, api_key):
     api_keys = get_api_keys()
     if api_key in api_keys:
         try:
@@ -81,7 +80,7 @@ def all_station_data(station, api_key):
         return "INCORRECT API KEY!"
 
 @app.route("/api/all_data_for_station_annual/<station>/<year>/api_key=<api_key>")
-def all_station_data_annual(station, year, api_key):
+def all_data_for_station_annual(station, year, api_key):
     api_keys = get_api_keys()
     if api_key in  api_keys:
         try:
@@ -102,4 +101,4 @@ def all_station_data_annual(station, year, api_key):
         return "INCORRECT API KEY!"
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
