@@ -40,7 +40,6 @@ def data(station, date, api_key):
                 temperature = float(df.loc[df["    DATE"] == date, "   TG"].squeeze() / 10)
             except TypeError:
                 return "Record Not Found!"
-            date
             ## Showing the API
             record = {"station ID": station,
                     "date": date,
