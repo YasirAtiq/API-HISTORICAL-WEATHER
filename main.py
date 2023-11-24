@@ -1,6 +1,7 @@
 ## Importing
 from flask import Flask, render_template, jsonify
 from dbutils.pooled_db import PooledDB
+from datetime import datetime
 import pandas as pd
 import sqlite3
 
@@ -40,6 +41,13 @@ def data(station, date, api_key):
                 temperature = float(df.loc[df["    DATE"] == date, "   TG"].squeeze() / 10)
             except TypeError:
                 return "Record Not Found!"
+
+            try:
+                date = datetime.strptime(date, "%Y%m%d")
+                date = date.strftime("%Y-%m-%d")     
+            except ValueError:
+                pass
+      
             ## Showing the API
             record = {"station ID": station,
                     "date": date,
@@ -94,4 +102,4 @@ def all_station_data_annual(station, year, api_key):
         return "INCORRECT API KEY!"
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=True)
