@@ -4,11 +4,8 @@ from dbutils.pooled_db import PooledDB
 import pandas as pd
 import sqlite3
 
-def get_connection():
-    return PooledDB(sqlite3, maxconnections=10, database="api_keys.sql").connection()
-
 def get_api_keys():
-    connection = get_connection()
+    connection = PooledDB(sqlite3, maxconnections=10, database="api_keys.sql").connection()
     cursor = connection.cursor()
     api_keys = []
     for row in cursor.execute("SELECT * FROM API_KEYS"):
@@ -16,16 +13,19 @@ def get_api_keys():
     cursor.close()
     connection.close()
     return api_keys
+
 ## Initiating the app
 app = Flask(__name__)
 
 ## Adding the "stations.txt" file here
 stations = pd.read_csv("data/stations.txt", skiprows=17)
-stations = stations[["STAID", "STANAME                                 "]]
+stations["Station ID"] = stations["STAID"]
+stations["Station"] = stations["STANAME                                 "]
+stations = stations[["Station ID", "Station"]]
 
 @app.route("/")
 def home():
-    return render_template('home.html', data=stations.to_html())
+    return render_template('home.html', data=stations.to_html(index=False, justify="center"))
 
 
 @app.route("/api/exact_date/<station>/<date>/api_key=<api_key>")
