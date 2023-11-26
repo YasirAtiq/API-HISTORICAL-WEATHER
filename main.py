@@ -6,7 +6,8 @@ import pandas as pd
 import sqlite3
 
 def get_api_keys():
-    connection = PooledDB(sqlite3, maxconnections=10, database="api_keys.sql").connection()
+    connection = PooledDB(sqlite3, maxconnections=10,
+                           database="api_keys.sql").connection()
     cursor = connection.cursor()
     api_keys = [row[1] for row in cursor.execute("SELECT * FROM API_KEYS")]
     cursor.close()
